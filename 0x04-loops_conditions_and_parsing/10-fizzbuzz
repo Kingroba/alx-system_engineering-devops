@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Displays Fizz, Buzz, or FizzBuzz based on the counter value.
+
+for (( COUNTER = 1; COUNTER <= 100; COUNTER++ )); do
+    if (( COUNTER % 15 == 0 )); then
+        echo "FizzBuzz"
+    elif (( COUNTER % 3 == 0 )); then
+        echo "Fizz"
+    elif (( COUNTER % 5 == 0 )); then
+        echo "Buzz"
+    else
+        echo "$COUNTER"
+    fi
+done
+

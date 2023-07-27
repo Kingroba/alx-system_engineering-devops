@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Displays numbers from 1 to 20 with special messages on specific numbers.
+
+for (( COUNTER = 1; COUNTER <= 20; COUNTER++ )); do
+    case $COUNTER in
+
+        4)
+            echo $COUNTER
+            echo "bad luck from China"
+            ;;
+
+        9)
+            echo $COUNTER
+            echo "bad luck from Japan"
+            ;;
+
+        17)
+            echo $COUNTER
+            echo "bad luck from Italy"
+            ;;
+
+        *)
+            echo $COUNTER
+            ;;
+    esac
+done
+
