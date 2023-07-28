@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# PID Display Script
+# This script creates a file /var/run/my_pid_script.pid containing the script's PID.
+# It displays "Running forever!" indefinitely.
+# Upon receiving a SIGINT, it displays "Why did you interrupt me?!".
+# Upon receiving a SIGTERM or SIGQUIT, it deletes the file /var/run/my_pid_script.pid and terminates.
+
+cleanup() {
+  rm /var/run/my_pid_script.pid
+  exit
+}
+
+echo "$$" > /var/run/my_pid_script.pid
+
+while true; do
+  echo "Running forever!"
+  sleep 2
+  trap 'echo "Why did you interrupt me?!"' SIGINT
+  trap 'cleanup' SIGTERM SIGQUIT
+done
+
