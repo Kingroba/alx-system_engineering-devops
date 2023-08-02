@@ -1,12 +1,8 @@
 #!/usr/bin/env ruby
 
-# Match "School" in the input string
-matches = ARGV[0].scan(/School/)
+# Match "School" in the input string and concatenate the matches
+matches = ARGV[0].scan(/School/).join
 
-# Output the results
-if matches.empty?
-  puts "No match found with 'School'"
-else
-  puts "Match found with 'School': #{matches.join(", ")}"
-end
+# Output the result
+puts "Match found with 'School': #{matches}"
 
