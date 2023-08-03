@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require 'onigmo'
 
 # Check if there is an argument passed while running the script
 if ARGV.empty?
@@ -6,6 +7,7 @@ if ARGV.empty?
   exit
 end
 
-# Use the `scan` method with the regular expression to find matches and join them
-puts ARGV[0].scan(/School/).join
+# Use the `scan` method with the Oniguruma regular expression engine to find matches and join them
+regex = Onigmo::Regexp.new('School')
+puts regex.match(ARGV[0]).to_a.join
 
