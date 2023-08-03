@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Script: 100-port_listening_on_localhost.sh
+# Description: Listen on port 98 on localhost and display received text.
+
+# Check if the script is being run as root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run this script with sudo or as root."
+  exit 1
+fi
+
+# Check if netcat (nc) is installed
+if ! command -v nc &> /dev/null; then
+  echo "Netcat (nc) is not installed or not in PATH. Please make sure it's installed and properly configured."
+  exit 1
+fi
+
+# Listen on port 98 and display received text
+nc -l -p 98
+

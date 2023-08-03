@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+# Script: 0-change_your_home_IP.sh
+# Description: Configure an Ubuntu server to meet specific requirements.
+
+# Check if the script is being run as root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run this script with sudo or as root."
+  exit 1
+fi
+
+# Check if the backup file exists to determine if the changes are applied
+if [ -f /etc/hosts.backup ]; then
+  echo "Reverting previous changes..."
+  cp /etc/hosts.backup /etc/hosts
+  rm /etc/hosts.backup
+
+  # Restore original /etc/resolv.conf
+  if [ -f /etc/resolv.conf.backup ]; then
+    cp /etc/resolv.conf.backup /etc/resolv.conf
+    rm /etc/resolv.conf.backup
+  fi
+
+  # Flush DNS cache
+  if command -v systemd-resolve &> /dev/null; then
+    sudo systemd-resolve --flush-caches
+  elif command -v service &> /dev/null; then
+    sudo service network-manager restart
+  else
+    echo "Failed to flush DNS cache. Please do it manually."
+  fi
+
+  echo "Reverted changes successfully!"
+  exit 0
+fi
+
+# Backup the original hosts file
+cp /etc/hosts /etc/hosts.backup
+
+# Replace localhost IP address with 127.0.0.2 in the hosts file
+sed -i 's/^127.0.0.1\slocalhost$/127.0.0.2 localhost/' /etc/hosts
+
+# Check if Docker is running
+if ! command -v docker &> /dev/null; then
+  echo "Docker is not installed or not in PATH. Please make sure Docker is installed and properly configured."
+  exit 1
+fi
+
+# Check if the container with DNS server is running
+if ! docker ps --format '{{.Names}}' | grep -q "dns_server"; then
+  echo "The DNS server container is not running. Please start the DNS server container first."
+  exit 1
+fi
+
+# Get the IP address of the DNS server container
+DNS_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dns_server)
+
+# Update the /etc/resolv.conf to use the DNS container IP
+echo "nameserver ${DNS_IP}" | sudo tee /etc/resolv.conf
+
+# Map facebook.com to 8.8.8.8 in the DNS server container
+docker exec -it dns_server /bin/bash -c "echo '8.8.8.8 facebook.com' >> /etc/hosts"
+
+# Flush DNS cache
+if command -v systemd-resolve &> /dev/null; then
+  sudo systemd-resolve --flush-caches
+elif command -v service &> /dev/null; then
+  sudo service network-manager restart
+else
+  echo "Failed to flush DNS cache. Please do it manually."
+fi
+
+echo "Configuration completed successfully!"
+
