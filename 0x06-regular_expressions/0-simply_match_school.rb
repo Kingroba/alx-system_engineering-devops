@@ -7,7 +7,16 @@ if ARGV.empty?
   exit
 end
 
-# Use the `scan` method with the Oniguruma regular expression engine to find matches and join them
+# Use the `match` method with the Oniguruma regular expression engine to find the first match
 regex = Onigmo::Regexp.new('School')
-puts regex.match(ARGV[0]).to_a.join
+match_data = regex.match(ARGV[0])
+
+# Check if there is a match and print the result
+if match_data
+  matched_substring = match_data.to_s
+  puts matched_substring
+  puts "(#{matched_substring.length} chars long)"
+else
+  puts "No match found for 'School'"
+end
 
