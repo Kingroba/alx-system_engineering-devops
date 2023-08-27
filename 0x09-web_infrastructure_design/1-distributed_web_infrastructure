@@ -1,0 +1,18 @@
+https://imgur.com/c16xnpV
+# Answers:
+
+1. Behold, a duet of servers emerges, each a sovereign realm replete with its own cadre of servitors—web servers, application servers, codebases, and databases. This arrangement serves as a bastion against the whims of digital tides and capricious surges in traffic, a sanctuary prepared for the unforeseen. Lo, the vigilant guardian—a HA proxy load balancer—stands ready, a celestial scalebearer, to evenly dispense the fervor of users across these twin citadels.
+
+2. A symphony of choices emerges, a minuet of load-balancing stratagems. In one corner, Weighted Round Robin, where servers are endowed with unique gravitas, and the server of grander presence dances to a livelier cadence, drawing a greater share of the crowd. On the other hand, Weighted Least Connection takes the stage, where servers again wear the robes of significance, and the honor of the next dance is bestowed upon the one with the lightest burden of connections.
+
+3. Observe the meticulous choreography of Active-Active—a pas de deux of resilience. Should one partner falter, it gracefully steps aside, its partner carrying forth the performance. Should the ailing dancer recover, it dons its mantle anew, orchestrated through the rhythms of health checks. Behold, the contrasting waltz of Active-Passive—a fleeting heartbeat, and the passive partner seizes the spotlight, a substitution swift and seamless, until the day its predecessor reclaims its role in the grand ballet.
+
+4/5. Gaze upon the tapestry of replication—the Primary Replica—a sovereign oracle, a primary wellspring graced with the honor of read and write. Its counterpart, the Secondary Replica, a mirror, a custodian of secrets, embracing the veracity of a full backup. Unified in synchronous or asynchronous harmony, they share a duet of roles. When the baton of failover conducts, the Secondary dons the mantle of the Primary, possibly forsaking data's embrace, with the original yielding a gracious curtsey. Then, the reawakening—the original Primary retakes its throne, the Secondary resuming its sentinel watch.
+
+# Issues Entwined within the Labyrinth:
+
+1. The specter of Single Point of Failure persists—an embodiment of vulnerability resonating within the solitary client's domain. Yet, a shadow more foreboding looms if these twins find abode in the same sanctuary, a shared power source in a common haven. A dance of dominos—faltering power may cascade into digital obscurity.
+
+2. Alas, the issue of security has not taken its final bow. The veiled dance of HTTP—unencrypted whispers of data traversing the ether—remains a charade unsuited for these times. An absent firewall grants carte blanche to incoming guests, an invitation to the banquet of data, unrestricted and unguarded.
+
+3. The silence of ignorance engulfs the stage, for no watchful eyes grace the performance. An absence of monitors leaves us adrift, ignorant of our web's emotional symphony—is it jubilant, languishing, or locked in a perpetual lament? Are errors its anthem, or does it sing the siren's song to every inquiry?
