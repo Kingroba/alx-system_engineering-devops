@@ -1,0 +1,25 @@
+https://imgur.com/a/E42WWvE
+
+# Specifics about this infrastructure:
+
+1. Envision a remarkable entity known as a server—a marvel of modern technology, encasing within its metallic heart a symphony of components: a robust hard disk, a formidable CPU, and an orchestra of RAM. Yet, what truly sets this enigmatic server apart from your everyday computer is its altruistic nature. Like a virtuoso of the digital realm, it extends its services to humble devices seeking refuge—housing files, orchestrating email exchanges, and escorting connections to the grand spectacles of the web. Behold, a server may don various guises, specializing in specific roles, or it might masterfully embrace all the roles in its repertoire.
+
+2. Behold the cryptic embodiment of digital nomenclature—the domain name. In a mesmerizing dance with the arcane DNS, this textual shapeshifter dons its symbolic attire, conjuring a bridge to its numerical counterpart, the elusive IP address.
+
+3. Gaze upon the riddle of www.foobar.com, where the mystique lies in the art of delineation. Here, the domain, foobar.com, emerges from obscurity beyond the dot, while the enigmatic prelude, "www," performs a ballet as a subdomain. "www" adorns itself with the cloak of a CNAME record, seamlessly entwined with the essence of foobar.com. Thus unified, they unveil the path to the ethereal IP address, orchestrated by the enigmatic DNS.
+
+4. The embodiment of a web server, a tangible vessel that cradles ethereal creations—HTML, Java, CSS, and images—an architectural symphony of code and artistry. This vessel, however, harbors more than meets the eye, for it nurtures the ethereal essence of web server software. Like a maestro directing a grand symphony, this software orchestrates the dance of digital access, guided by the primordial rhythms of HTTP, deciphering URLs and requests to unveil the tableau of static webpages.
+
+5. Amidst the digital tapestry, a silent sentinel emerges—the Application Server, harbinger of logic and transformation. With a touch of arcane sorcery, it molds data into wondrous forms, casting the spell of interactivity upon webpages. A conduit betwixt web server and database, it tames the tempestuous currents of interaction, harnessing the echoes of past exchanges to bestow the gifts of performance and management upon us.
+
+6. Behold the sanctuary of data—the database—an intricate labyrinth designed to house knowledge with elegance and accessibility. Within its hallowed chambers, information slumbers, awaiting the seeker's call to awaken and dance.
+
+7. As the sun and moon converse through cosmic dances, so do servers and clients engage in dialogue through the art of IP addresses. With protocols as their lexicon—TCP/IP, HTTP—they waltz upon the digital stage, weaving tales of connectivity and understanding.
+
+# Issues with the Tapestry of Infrastructure:
+
+1. Ah, the elusive Achilles' heel—Single Point of Failure, lurking like a shadow within software, hardware, or the fragile web of connections. Even a sovereign server can fall victim to this whimsical fate, whether due to capricious malfunctions or the cosmic vexations of data centers.
+
+2. Alas, the chronicle of Downtime unfolds—a tale of transition, where the system's heartbeat briefly falters as updates transpire. During this interlude, the curtain descends, and users must await the system's reawakening, for no understudy server graces the stage.
+
+3. Singular majesty in the face of voluminous torrents—our solitary server, bearing the weight of its digital kingdom, quivers under the deluge of traffic. Behold its vulnerability, for it yearns for a twin, a comrade of computation, to stave off the tempest and embrace the promise of scalability.
