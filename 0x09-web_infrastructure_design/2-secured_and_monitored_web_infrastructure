@@ -1,0 +1,30 @@
+https://imgur.com/a/LLWlwHi
+
+1. Enhanced Security with Firewalls and Monitoring:
+In order to bolster our infrastructure's security, we have introduced firewalls that serve as safeguards against unauthorized access. These firewalls, which can be implemented either as software or hardware components, regulate the flow of data in and out of our network. By adhering to pre-established rules, incoming and outgoing data is evaluated. If the data aligns with the predefined criteria, it is permitted to traverse the network. Concurrently, we've integrated advanced monitoring tools into our system. These tools play a dual role: firstly, they diligently monitor the performance of both our applications and servers; secondly, they serve as data collectors. This insightful data enables us to gauge system performance, see if it can handle the traffic, and determine if it is scalable enough for the incoming traffic. Additionally, the monitoring tools aid in identifying any discrepancies.
+
+2. Firewall Functionality:
+Firewalls, whether implemented as software or hardware, function as a robust line of defense against unauthorized network access. Their operation hinges on a set of predetermined rules that govern the evaluation of incoming and outgoing data. Only data that adheres to these established rules is permitted entry into the network. This active filtering process plays a pivotal role in safeguarding our infrastructure.
+
+3. HTTPS for Secure Data Transfer:
+HTTPS, an evolution of the standard HTTP protocol, ensures secure data transfer across networks. This heightened security is achieved through data encryption during transmission. When an HTTPS request is initiated, the server responds by sending a public key along with an SSL certificate. Subsequently, a secure handshake process takes place, wherein the client also presents its credentials, aligning with the SSL certificate. This process enables the data to be securely decrypted on the client's end, bolstering overall security.
+
+4. Effective Monitoring Tool Utilization:
+Our system incorporates sophisticated monitoring tools that play a pivotal role in data collection and performance assessment. These tools provide invaluable insights into system operations, capturing key metrics related to both applications and servers. By analyzing this data, we can promptly detect any irregularities that might be impeding optimal performance. This proactive approach empowers us to efficiently address recurrent issues by focusing our efforts on the specific areas identified by the collected data.
+
+5. Continuous Data Collection for Immediate Action:
+The process of data collection operates seamlessly and continuously as applications and servers perform their tasks. Throughout this ongoing operation, key aspects such as performance, availability, and user experiences are consistently monitored. The data harvested during this process is then transformed into a comprehensible format. This approach enables swift detection of any anomalies, facilitating rapid intervention and resolution should any glitches or disruptions arise.
+
+6. Sequential Implementation Approach:
+Our strategy for implementing these enhancements begins with the deployment of monitoring tools. These tools are adept at monitoring various metrics that offer insights into system performance. Metrics such as queries per second are among the data points these tools scrutinize. By initiating this process, we create a foundation for meticulously monitoring our infrastructure's performance, evaluating its scalability, and swiftly addressing any deviations or inefficiencies.
+
+Issues with the Infrastructure:
+
+1. Impact of SSL Termination on Sensitive Data:
+While considering SSL termination, it's important to acknowledge potential implications on the security of sensitive data during transactions. The secure connection that transactions require could be compromised if not managed appropriately.
+
+2. Scalability Challenges with MySQL Server:
+A singular MySQL server presents a scalability challenge, as it lacks the capacity to efficiently accommodate growing demands. Additionally, relying on a single server can create a vulnerability, serving as a potential single point of failure within the web infrastructure.
+
+3. Resource Contention and Poor Performance:
+An infrastructure where servers share identical components might lead to resource contention, particularly in terms of CPU, memory, and I/O. Such competition for resources can result in suboptimal performance. Moreover, diagnosing the source of performance issues in such a setup can be challenging. This configuration is not conducive to easy scalability due to its resource limitations.

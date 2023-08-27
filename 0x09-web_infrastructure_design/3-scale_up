@@ -1,0 +1,29 @@
+https://imgur.com/3wcVHmK
+
+# Application Server vs. Web Server:
+In the context of web development and hosting, the terms "application server" and "web server" refer to different components that work together to deliver web applications to users.
+
+1. Web Server: A web server is responsible for handling HTTP requests from clients (usually web browsers) and responding with HTML files, images, CSS, and other static assets. It serves as the initial point of contact for user requests. Examples of web servers include Apache, Nginx, and Microsoft IIS.
+
+2. Application Server: An application server is responsible for executing the business logic of a web application. It interacts with the database and processes dynamic content before sending a response back to the web server. It can handle tasks like user authentication, data processing, and complex calculations.
+
+# Infrastructure Requirements:
+
+1. Server: You need at least one physical or virtual server to host your application, which includes both the web server and the application server.
+
+2. Load Balancer (HAProxy): The load balancer distributes incoming traffic across multiple servers to ensure efficient resource utilization and high availability. By configuring HAProxy as a cluster, you're setting up redundancy and fault tolerance. If one load balancer goes down, another can take over seamlessly.
+
+3. Split Components: Each major component of your application—web server, application server, and database—should run on its own separate server. This separation enhances security, scalability, and maintainability. If one component experiences issues, it's less likely to affect the others.
+
+# Reasons for Adding Each Element:
+
+1. Server: The server is the fundamental unit of your infrastructure. It's where your application's code and data reside. Without a server, you wouldn't have a place to host your application.
+
+2. Load Balancer (HAProxy): A load balancer is added to distribute incoming traffic among multiple servers, which prevents overloading any one server and improves responsiveness. Configuring it as a cluster ensures reliability—there's a backup in case of failures.
+
+3. Split Components:
+
+3.1 Web Server: It's added to handle incoming HTTP requests, serve static assets, and manage initial user interactions. This separation allows the application server to focus on processing dynamic content.
+3.2 Application Server: Adding a dedicated application server is essential to manage the complex business logic of your application. It keeps the web server lean and specialized in its tasks.
+3.3 Database Server: While not explicitly mentioned, having a separate database server is implied. This setup maintains data integrity, performance, and isolation. The application server communicates with the database server to store and retrieve data.
+
