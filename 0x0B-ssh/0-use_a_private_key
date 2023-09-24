@@ -7,5 +7,5 @@ user="ubuntu"
 server_address="54.157.164.80"
 
 # Use ssh with private key and specified user
-ssh -i $private_key $user@$server_address
+ssh -i ~/.ssh/school ubuntu@54.157.164.80
 
