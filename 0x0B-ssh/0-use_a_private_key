@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Connect to server using ssh with private key
+
+# Define variables
+private_key="~/.ssh/school"
+user="ubuntu"
+server_address="54.157.164.80"
+
+# Use ssh with private key and specified user
+ssh -i $private_key $user@$server_address
+
