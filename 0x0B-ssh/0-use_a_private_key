@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-
-# Connect to server using ssh with private key
+# This script connects to the server using SSH with a private key.
 
 # Define variables
 private_key="~/.ssh/school"
