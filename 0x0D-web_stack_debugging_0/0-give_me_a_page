@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# This script starts the Apache service within a Docker container to resolve a curl response error.
+docker exec -it <container_name> service apache2 start
+
