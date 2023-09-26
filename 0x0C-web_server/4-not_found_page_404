@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# Configure your Nginx server to have a custom 404 page that contains the string "Ceci n'est pas une page."
+
+STRING="Hello World!"
+REDIRECT="\n\tlocation /redirect_me {\n\t\treturn 301 https://youtu.be/dQw4w9WgXcQ;\n\t}\n"
+FILE="/etc/nginx/sites-available/default"
+ERRORFILE="/usr/share/nginx/html/404error.html"
+FOUR="Ceci n'est pas une page"
+ERRORREDIRECT="\n\terror_page 404 /404error.html;\n\tlocation = /404error.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}\n"
+
+# Update and install Nginx
+apt-get -y update
+apt-get -y install nginx
+
+# Allow Nginx through the firewall
+ufw allow 'Nginx HTTP'
+
+# Create a basic index.html file
+echo "$STRING" > /var/www/html/index.nginx-debian.html
+
+# Add the redirection location block to the Nginx configuration
+sed -i "37i\ $REDIRECT" "$FILE"
+
+# Create the custom 404 error page
+echo "$FOUR" > "$ERRORFILE"
+
+# Add the custom error page configuration to the Nginx configuration
+sed -i "37i\ $ERRORREDIRECT" "$FILE"
+
+# Restart Nginx to apply changes
+service nginx restart
+

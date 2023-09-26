@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Bash script to install and configure the Nginx web server:
+
+# Update package information and install Nginx
+sudo apt-get update -y
+sudo apt-get install -y nginx
+
+# Configure Nginx
+ufw allow 'Nginx HTTP'
+sudo sed -i 's/80 default_server/80/' /etc/nginx/sites-available/default
+sudo service nginx restart
+
+# Create an index.html file to be served by the server
+echo 'Hello World!' | sudo tee /var/www/html/index.html > /dev/null
+

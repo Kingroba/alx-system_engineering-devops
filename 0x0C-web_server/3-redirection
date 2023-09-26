@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# Script to configure your Nginx server to redirect /redirect_me to another page.
+
+# Update and upgrade packages, then install Nginx
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y install nginx
+
+# Start Nginx service
+sudo service nginx start
+
+# Create a basic index.html file
+sudo sh -c 'echo "Hello World!" > /var/www/html/index.html'
+
+# Remove default nginx-debian index file
+sudo rm /var/www/html/index.nginx-debian.html
+
+# Add a rewrite rule to the Nginx configuration
+sudo sed -i '/listen \[::\]:80 default_server;/a rewrite ^/redirect_me/(.*)$ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+
+# Restart Nginx to apply changes
+sudo service nginx restart
+
