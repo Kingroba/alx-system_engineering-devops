@@ -1,38 +1,19 @@
 #!/usr/bin/env bash
-# Customizing a 404-error_page
+# Configure Nginx with custom HTTP response header
 
 # Update Packages before performing installations
 sudo apt-get update
+
+# Install Nginx
 sudo apt-get install -y nginx
 
-# Create an index.html page
-echo "Hello World!" | sudo tee /var/www/html/index.html
+# Create a custom 404 error page
+echo "This is a custom 404 error page." | sudo tee /var/www/html/404.html
 
-# Perform a "moved permanently redirection" (301)
-new_string="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/opius2017 permanent;"
-sudo sed -i "s/server_name _;/$new_string/" /etc/nginx/sites-enabled/default
+# Configure Nginx to include custom header
+header_config="add_header X-Served-By \$hostname;"
+sudo sed -i "/server_name _/a $header_config" /etc/nginx/sites-enabled/default
 
-# Create a 404 Custom error page
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
-new_string="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
-
-sudo sed -i "s/listen 80 default_server;/$new_string/" /etc/nginx/sites-enabled/default
-
-# Create an HTTP response header with updated server details
-servers="282575-web-01 ubuntu 54.157.164.80 running
-282575-web-02 ubuntu 54.157.152.244 running
-282575-lb-01 ubuntu 54.160.69.34"
-IFS=$'\n'
-for server in $servers; do
-    server_name=$(echo $server | awk '{print $1}')
-    ip_address=$(echo $server | awk '{print $3}')
-    sudo sed -i "/server_name _/a add_header X-Served-By $server_name;" /etc/nginx/sites-enabled/default
-    sudo sed -i "s/server_name _;/server_name $ip_address $server_name;/" /etc/nginx/sites-enabled/default
-done
-
-# Test configurations for syntax errors
-sudo nginx -t
-
-# Restart nginx after implementing changes
+# Restart Nginx to apply changes
 sudo service nginx restart
 
