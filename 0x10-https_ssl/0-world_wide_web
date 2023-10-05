@@ -1,26 +1,37 @@
-#!/usr/bin/env bash
-# This is Bash script that will display information about subdomains.
-function domain_check {
-	domain_names=("www" "lb-01" "web-01" "web-02")
+#!/bin/bash
 
-	for i in "${domain_names[@]}";
-	do
-		dig "${i}"."$1" | grep -A1 'ANSWER SECTION:' | \
-		awk 'FNR == 2 {printf "The subdomain %s is a %s record and points to %s\n", var, $4, $5}' var="$i"
-	done
+# Function to get DNS information for a subdomain
+get_dns_info() {
+    subdomain=$1
+    domain=$2
+    dig_result=$(dig "$subdomain.$domain" +short)
+    record_type=$(dig "$subdomain.$domain" | awk '/ANSWER SECTION/ {print $4}')
+    echo "The subdomain $subdomain is a $record_type record and points to $dig_result"
 }
 
-function subdomain_check {
-	dig "${2}"."$1" | grep -A1 'ANSWER SECTION:' | \
-	awk 'FNR == 2 {printf "The subdomain %s is a %s record and points to %s\n", var, $4, $5}' var="$2"
+# Main function
+main() {
+    domain=$1
+
+    # If subdomain is provided, get info for that subdomain
+    if [ -n "$2" ]; then
+        subdomain=$2
+        get_dns_info "$subdomain" "$domain"
+    else
+        # Otherwise, get info for default subdomains
+        subdomains=("www" "lb-01" "web-01" "web-02")
+        for subdomain in "${subdomains[@]}"; do
+            get_dns_info "$subdomain" "$domain"
+        done
+    fi
 }
 
-if [ $# -lt 1 ]
-then
-	echo "*** Provide domain name ***"
-elif [ $# -eq 1 ]
-then
-	domain_check "$1";
-else
-	subdomain_check "$1" "$2";
+# Check if domain argument is provided
+if [ -z "$1" ]; then
+    echo "Error: Domain argument is missing"
+    exit 1
 fi
+
+# Call the main function
+main "$@"
+
