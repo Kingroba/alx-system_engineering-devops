@@ -1,37 +1,31 @@
-#!/bin/bash
 
-# Function to get DNS information for a subdomain
-get_dns_info() {
-    subdomain=$1
-    domain=$2
-    dig_result=$(dig "$subdomain.$domain" +short)
-    record_type=$(dig "$subdomain.$domain" | awk '/ANSWER SECTION/ {print $4}')
-    echo "The subdomain $subdomain is a $record_type record and points to $dig_result"
+n domain_check {
+    domain_names=("web-01" "web-02" "lb-01")
+
+    for i in "${domain_names[@]}";
+    do
+        ip=$(grep "${i}" <<< "$info" | awk '{print $3}')
+        state=$(grep "${i}" <<< "$info" | awk '{print $4}')
+
+        dig "${i}"."$1" | grep -A1 'ANSWER SECTION:' | \
+        awk -v var="$i" -v ip="$ip" -v state="$state" 'FNR == 2 {printf "The subdomain %s is a %s record and points to %s. IP: %s, State: %s\n", var, $4, $5, ip, state}'
+    done
 }
 
-# Main function
-main() {
-    domain=$1
+# Example information provided
+info="
+282575-web-01 ubuntu 54.157.164.80 running
+282575-web-02 ubuntu 54.157.152.244 running
+282575-lb-01 ubuntu 54.160.69.34
+"
 
-    # If subdomain is provided, get info for that subdomain
-    if [ -n "$2" ]; then
-        subdomain=$2
-        get_dns_info "$subdomain" "$domain"
-    else
-        # Otherwise, get info for default subdomains
-        subdomains=("www" "lb-01" "web-01" "web-02")
-        for subdomain in "${subdomains[@]}"; do
-            get_dns_info "$subdomain" "$domain"
-        done
-    fi
-}
-
-# Check if domain argument is provided
-if [ -z "$1" ]; then
-    echo "Error: Domain argument is missing"
-    exit 1
+if [ $# -lt 1 ]
+then
+    echo "*** Provide domain name ***"
+elif [ $# -eq 1 ]
+then
+    domain_check "$1";
+else
+    subdomain_check "$1" "$2";
 fi
-
-# Call the main function
-main "$@"
 
