@@ -6,6 +6,7 @@ This is the JSON placeholder api to query data about an employee
 from requests import get
 from sys import argv
 
+
 def get_employee_data(user_id):
     main_url = 'https://jsonplaceholder.typicode.com'
     todo_url = f"{main_url}/user/{user_id}/todos"
@@ -18,6 +19,7 @@ def get_employee_data(user_id):
     name = name_result.get("name")
 
     return name, todo_complete, todo_num, todo_result
+
 
 if __name__ == '__main__':
     user_id = argv[1]
