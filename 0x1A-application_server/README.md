@@ -3,9 +3,14 @@ DevOps
 SysAdmin
  By: Sylvain Kalache, co-founder at Holberton School
  Weight: 1
- Project will start Nov 13, 2023 6:00 AM, must end by Nov 17, 2023 6:00 AM
- Checker was released at Nov 15, 2023 8:24 PM
+ Ongoing second chance project - started Nov 13, 2023 6:00 AM, must end by Nov 19, 2023 6:00 AM
  An auto review will be launched at the deadline
+In a nutshell…
+Auto QA review: 0.0/15 mandatory & 0.0/9 optional
+Altogether:  0.0%
+Mandatory: 0.0%
+Optional: 0.0%
+Calculation:  0.0% + (0.0% * 0.0%)  == 0.0%
 Concepts
 For this project, we expect you to look at these concepts:
 
